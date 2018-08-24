@@ -17,7 +17,7 @@ class ConsoleDraftRunner():
 	def run(self,runContinuous):
 		result = ""
 		while True:
-			user_input = input("Input (C=CheatSheet,D=Draft,\n\tU=Undo,Q=Quit,P=Picks,R=Roster,I=Info,N=News):").upper().strip()
+			user_input = input("Input (C=CheatSheet,D=Draft,\n\tU=Undo,Q=Quit,P=Picks,R=Roster,N=News):").upper().strip()
 			result = self.parse_user_input(user_input)
 			clear_output()
 			print(result)
@@ -45,7 +45,7 @@ class ConsoleDraftRunner():
 			elif option == "A":
 				result = draft.utility_adjusted_cheatsheet('FPRank',draft.my_pick)[:20].reset_index(drop=True)
 			elif option =="D":
-				i = getCorrectName(ext,draft.draftList.loc[draft.draftList.Pick.isnull()])
+				i = getCorrectName(ext,draft.undrafted_players())
 				if i is not None:
 					name = draft.add_player(i)
 					if name.Roster == draft.my_pick :
@@ -55,21 +55,21 @@ class ConsoleDraftRunner():
 				else: 
 					result = "No player found"
 			elif option == "U":
-				if sum(draft.draftList.Pick.notnull()) ==0:
+				if draft.draftList.empty:
 					result = "No picks made"
 				else:
 					if not ext:
 						pick= max(draft.draftList.Pick)+1
 						i = draft.draftList.loc[draft.draftList.Pick==(pick-1)].index.values[0]
 					else:
-						i=getCorrectName(ext,draft.draftList.loc[draft.draftList.Pick.notnull()])
+						i=getCorrectName(ext,draft.draftList)
 					if i is not None:
 						name = draft.undo_pick(i)
 						result = "Undid draft back to "+name.First+" " + name.Last+" " + name.Position+" " + name.Team
 					else:
 						result = "No player found"
 			elif option =="I":
-				i = getCorrectName(ext,draft.draftList)
+				i = getCorrectName(ext,draft.playerList)
 				if i is not None:
 					result=""
 					try:
@@ -84,7 +84,7 @@ class ConsoleDraftRunner():
 				else: 
 					result = "No player found"
 			elif option == "N":
-				i = getCorrectName(ext,draft.draftList.loc[draft.rotoWorld.loc[draft.rotoWorld.Link.notnull()].index])
+				i = getCorrectName(ext,draft.playerList.loc[draft.rotoWorld.loc[draft.rotoWorld.Link.notnull()].index])
 				if i is not None:
 					url = draft.rotoWorld.loc[i,"Link"]
 					news = rw.pullPlayerNews(url)
@@ -96,7 +96,7 @@ class ConsoleDraftRunner():
 					result = "No player found"
 			else: 
 				result = "Invalid command"
-		except: result = "Got an error for command " + user_input  + ": " +str(sys.exc_info()[0])
+		except Exception as e: result = "Got an error for command " + user_input  + ": " +str(e)
 		if isinstance(result,str):
 			result = "\n"+result+"\n\n"
 			result = result.encode(sys.stdout.encoding,"replace").decode(sys.stdout.encoding)

@@ -11,18 +11,16 @@ from IPython.display import clear_output
 from threading import Thread
 
 class Draft():
-	def __init__(self, draftFile=None,teams = 12, roster_size=15,my_pick = 2):
+	def __init__(self, draftFile: str =None,teams: int = 12, roster_size: int =15,my_pick: int = 1):
 		if draftFile == None:
 			draftFile= "testdraft.csv"
-			draftList = pd.read_csv( pl.DATA_FILE_NAME, sep= "\t", index_col	=0)[['First','Last','Position','Team']]
+			draftList = pd.DataFrame(columns=[['First','Last','Position','Team','Pick','Roster']])
 			draftList.columns = draftList.columns.str.strip()
-			draftList["Pick"] = np.NaN
-			draftList["Roster"] = np.NaN
-			draftList
 		else:
 			draftList = pd.read_csv("Drafts\\"+draftFile, sep= "\t", index_col	=0)
 		self.draftFile= draftFile
 		self.draftList = draftList
+		self.playerList = pd.read_csv(pl.DATA_FILE_NAME, sep= "\t", index_col	=0)
 		self.teams = max(1,teams)
 		self.my_pick =min(max(1,my_pick),teams)
 		self.roster_size = max(1,roster_size)
@@ -31,18 +29,22 @@ class Draft():
 		self.rotoWorld = pd.read_csv(rw.DATA_FILE_NAME,sep = '\t',index_col = 0)
 		self.save_draft()
 		
+	def undrafted_players(self):
+		return self.playerList.loc[~self.playerList.index.isin(self.draftList.index)]
+		
 	def add_player(self,index):
-		pick =  sum(self.draftList.Pick.notnull())+1
-		team = snake_order(pick,self.teams)
-		self.draftList.loc[index,'Pick'] = pick
-		self.draftList.loc[index,'Roster'] = team
+		if index in (self.draftList.index):
+			raise ValueError('Player has already been drafted')
+		else:
+			pick =  sum(self.draftList.Pick.notnull())+1
+			team = snake_order(pick,self.teams)
+			self.draftList.loc[index] = np.append(self.playerList.loc[index].drop(['Suffix']).values,[pick,team])
 		return self.draftList.loc[index]
 
 	def undo_pick(self,index):
 		name = self.draftList.loc[index]
-		self.draftList.loc[self.draftList.Pick>=name.Pick,"Roster"] =np.NaN
-		self.draftList.loc[self.draftList.Pick>=name.Pick,"Pick"] =np.NaN
-		return self.draftList.loc[index]
+		self.draftList= self.draftList.drop(self.draftList.loc[self.draftList.Pick>=name.Pick].index)
+		return name
 		
 	def get_roster(self,team):
 		roster = self.draftList.loc[self.draftList.Roster==team]
@@ -50,21 +52,20 @@ class Draft():
 
 	def get_cheatsheet(self,position = None,l=20):
 		if not position:
-			remaining = self.cheatSheet.loc[self.draftList.Pick.isnull()]
+			remaining = self.cheatSheet.loc[self.undrafted_players().index]
 		else:
-			remaining = self.cheatSheet.loc[(self.draftList.Pick.isnull()) & (self.draftList.Position==position)]
+			remaining = self.cheatSheet.loc[(self.undrafted_players().index) & (self.undrafted_players().Position==position)]
 		return remaining.sort_values(by=["FPRank"])[:l].reset_index(drop=True)
 	
 	def utility_adjusted_cheatsheet(self,ranking='FPRank',r = None,l=20):
 		if not r: r = self.my_pick
-		cs = self.cheatSheet.loc[self.draftList.Pick.isnull()]
+		cs = self.cheatSheet.loc[self.undrafted_players().index]
 		stripped = cs[['Position',ranking]].rename(columns={ranking:'Rank'})
 		util_adjust = self.util_adjust(r,stripped)
 		return pd.concat([cs,util_adjust],axis=1).sort_values(by=util_adjust.name)[:l].reset_index(drop=True)
 		
 	def get_picks(self):
-		picked = self.draftList.loc[self.draftList.Pick.notnull()]
-		return picked.sort_values(by=["Pick"]).reset_index(drop=True)
+		return  self.draftList.sort_values(by=["Pick"]).reset_index(drop=True)
 	
 	def auto_draft(self,spotsToAutoDraft,rankingColumnToUse):
 		for i in range(1,spotsToAutoDraft):
