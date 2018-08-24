@@ -8,6 +8,7 @@ import PlayerList as pl
 import DraftAnalysis as da
 from numpy import rank
 from IPython.display import clear_output
+from threading import Thread
 
 class Draft():
 	def __init__(self, draftFile=None,teams = 12, roster_size=15,my_pick = 2):
@@ -54,12 +55,12 @@ class Draft():
 			remaining = self.cheatSheet.loc[(self.draftList.Pick.isnull()) & (self.draftList.Position==position)]
 		return remaining.sort_values(by=["FPRank"])[:l].reset_index(drop=True)
 	
-	def utility_adjusted_cheatsheet(self,ranking='FPRank',r = None):
+	def utility_adjusted_cheatsheet(self,ranking='FPRank',r = None,l=20):
 		if not r: r = self.my_pick
 		cs = self.cheatSheet.loc[self.draftList.Pick.isnull()]
 		stripped = cs[['Position',ranking]].rename(columns={ranking:'Rank'})
 		util_adjust = self.util_adjust(r,stripped)
-		return pd.concat([cs,util_adjust],axis=1).sort_values(by=util_adjust.name)
+		return pd.concat([cs,util_adjust],axis=1).sort_values(by=util_adjust.name)[:l].reset_index(drop=True)
 		
 	def get_picks(self):
 		picked = self.draftList.loc[self.draftList.Pick.notnull()]

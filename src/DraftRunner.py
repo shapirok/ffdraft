@@ -2,29 +2,32 @@ import sys
 import numpy as np
 import pandas as pd
 import Draft as d
+import RotoWorld as rw
 from numpy import rank
 from IPython.display import clear_output
+from threading import Thread
 
-POSITIONS = ['RB','WR','TE','QB','K','DEF']
-	
-	
 class ConsoleDraftRunner():
-	def __init__(self, draft):
+	def __init__(self, draft,runContinuous=False):
+		self.draft=draft
+		self.run(runContinuous)
+		#Thread.__init__(self)
+		#self.start()
+		
+	def run(self,runContinuous):
 		result = ""
 		while True:
-			#result_last = result
-			result = self.user_input(draft)
-			if str(result).strip() =="Quit":
-				draft.save_draft()
-				break
+			user_input = input("Input (C=CheatSheet,D=Draft,\n\tU=Undo,Q=Quit,P=Picks,R=Roster,I=Info,N=News):").upper().strip()
+			result = self.parse_user_input(user_input)
 			clear_output()
 			print(result)
-			draft.save_draft()
+			if (str(result).strip() == "Quit") | (runContinuous ==False):
+				break
+		return None
 			
-	def user_input(self,draft):
+	def parse_user_input(self,user_input):
+		draft = self.draft
 		try:
-			user_input = input("Input (C=CheatSheet,D=Draft,\n\tU=Undo,Q=Quit,P=Picks,R=Roster,I=Info,N=News):")
-			user_input = user_input.upper().strip()
 			option = user_input[0]
 			ext = user_input[2:]
 			if option == "Q":
@@ -40,7 +43,7 @@ class ConsoleDraftRunner():
 			elif option == "C":
 				result = draft.get_cheatsheet(ext,20)
 			elif option == "A":
-				result = draft.adj_cheatsheet('FPRank',draft.my_pick)[:20].reset_index(drop=True)
+				result = draft.utility_adjusted_cheatsheet('FPRank',draft.my_pick)[:20].reset_index(drop=True)
 			elif option =="D":
 				i = getCorrectName(ext,draft.draftList.loc[draft.draftList.Pick.isnull()])
 				if i is not None:
@@ -93,12 +96,13 @@ class ConsoleDraftRunner():
 					result = "No player found"
 			else: 
 				result = "Invalid command"
-		except: result = "Invalid command"
+		except: result = "Got an error for command " + user_input  + ": " +str(sys.exc_info()[0])
 		if isinstance(result,str):
 			result = "\n"+result+"\n\n"
 			result = result.encode(sys.stdout.encoding,"replace").decode(sys.stdout.encoding)
 		else: 
-			result = result
+			result = result	
+		draft.save_draft()
 		return result
 
 
