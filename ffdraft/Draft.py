@@ -27,7 +27,6 @@ class Draft():
 		self.cheatSheet = pd.read_csv(cs.DATA_FILE_NAME,sep = '\t',index_col=0)
 		self.injuryReport = pd.read_csv(ir.DATA_FILE_NAME,sep = '\t',index_col = 0)
 		self.rotoWorld = pd.read_csv(rw.DATA_FILE_NAME,sep = '\t',index_col = 0)
-		self.save_draft()
 		
 	def undrafted_players(self):
 		return self.playerList.loc[~self.playerList.index.isin(self.draftList.index)]
@@ -73,7 +72,6 @@ class Draft():
 			cs = self.utility_adjusted_cheatsheet(ranking=rankingColumnToUse, r=roster).sort_values(by='UtilRank')
 			i = cs.index[0]
 			self.add_player(i)
-		self.save_draft()
 		return self.get_picks().iloc[::-1][:spotsToAutoDraft-1].iloc[::-1]
 	
 	def save_draft(self):
