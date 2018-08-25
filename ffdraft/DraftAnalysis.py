@@ -1,7 +1,5 @@
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
-from sklearn.linear_model import LinearRegression
 
 class Analyze():
 	def __init__(self,Draft):
@@ -58,7 +56,7 @@ class Analyze():
 
 #get the upside of a set of players given their average and standard deviation
 
-def upsideIndicator(avg: pd.Series,stdev: pd.Series):
+""" def upsideIndicator(avg: pd.Series,stdev: pd.Series):
 	avgArr = avg.reshape(-1,1)
 	stdevArr = stdev.reshape(-1,1)
 	upsideRaw = pow(stdevArr,2)/avgArr
@@ -68,7 +66,7 @@ def upsideIndicator(avg: pd.Series,stdev: pd.Series):
 	upside = upsideRaw-exp
 	upside = upside.reshape(-1)
 	upside= (upside/np.linalg.norm(upside)*100).round()
-	return pd.Series(upside,index=avg.index).rename('Upside')
+	return pd.Series(upside,index=avg.index).rename('Upside') """
 #some math functions used for the stats above
 	
 def logistic(x,x1,y1,x2,y2):

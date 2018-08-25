@@ -8,7 +8,6 @@ import PlayerList as pl
 import DraftAnalysis as da
 from numpy import rank
 from IPython.display import clear_output
-import csv
 
 class Draft():
 	def __init__(self, name: str =None,teams: int = None, roster_size: int =None,my_pick: int = None):

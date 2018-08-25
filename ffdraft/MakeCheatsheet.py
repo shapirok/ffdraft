@@ -22,9 +22,9 @@ def main():
 	noDNoK = cheatSheetWithFPRanks.loc[(cheatSheetWithFPRanks.Position !="DEF") 
 									   & (cheatSheetWithFPRanks.Position !="K")
 									   & (cheatSheetWithFPRanks['Avg'].notnull())]
-	upside = da.upsideIndicator(avg = noDNoK['Avg'],stdev = noDNoK['Std Dev'])
-	fpData = pd.concat([fpData,upside],axis=1)
-	fpData = fpData[['Rank','Upside']]
+	#upside = da.upsideIndicator(avg = noDNoK['Avg'],stdev = noDNoK['Std Dev'])
+	#fpData = pd.concat([fpData,upside],axis=1)
+	fpData = fpData[['Rank','Std Dev']]
 	fpData.rename(columns={'Rank':'FPRank'},inplace=True)
 	cheatSheet = cheatSheet.merge(fpData, how="left",left_index=True,right_index=True)
 	
