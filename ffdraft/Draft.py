@@ -12,8 +12,8 @@ from IPython.display import clear_output
 class Draft():
 	def __init__(self, name: str =None,teams: int = None, roster_size: int =None,my_pick: int = None):
 		try: 
-			draftList = pd.read_csv("Drafts\\"+name+".csv", sep= "\t", index_col=0)
-			parameters = pd.read_csv("Drafts\\"+name+"_params.csv", sep= "\t", index_col	=0).transpose().iloc[0]
+			draftList = pd.read_csv("Drafts/"+name+".csv", sep= "\t", index_col=0)
+			parameters = pd.read_csv("Drafts/"+name+"_params.csv", sep= "\t", index_col	=0).transpose().iloc[0]
 		except:
 			print("Couldn't find files")
 			draftList = pd.DataFrame(columns=[['First','Last','Position','Team','Pick','Roster']])
@@ -76,8 +76,8 @@ class Draft():
 		return self.get_picks().iloc[::-1][:spotsToAutoDraft-1].iloc[::-1]
 	
 	def save_draft(self):
-		self.draftList.to_csv('Drafts\\'+self.name+".csv",sep = '\t')
-		pd.DataFrame.from_dict(self.parameters, orient='columns').to_csv('Drafts\\'+self.name+"_params.csv",sep = '\t')
+		self.draftList.to_csv('Drafts/'+self.name+".csv",sep = '\t')
+		pd.DataFrame.from_dict(self.parameters, orient='columns').to_csv('Drafts/'+self.name+"_params.csv",sep = '\t')
 	
 	def Analyze(self):
 		return da.Analyze(self)

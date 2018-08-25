@@ -8,8 +8,8 @@ import CommonFunctions as cf
 import PlayerList as pl
 import re
 
-RAW_FILE_NAME = 'RawData\\RWRawData.csv'
-DATA_FILE_NAME = 'Data\\RWBlurbs.csv'
+RAW_FILE_NAME = 'RawData/RWRawData.csv'
+DATA_FILE_NAME = 'Data/RWBlurbs.csv'
 
 
 

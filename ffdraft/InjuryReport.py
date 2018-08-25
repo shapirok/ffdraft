@@ -4,8 +4,8 @@ from bs4 import BeautifulSoup
 import CommonFunctions as cf
 
 URL = 'http://www.rotoworld.com/teams/injuries/nfl/all/'
-RAW_FILE_NAME = 'RawData\\injuryreportraw.csv'
-DATA_FILE_NAME = 'Data\\injuryreport.csv'
+RAW_FILE_NAME = 'RawData/injuryreportraw.csv'
+DATA_FILE_NAME = 'Data/injuryreport.csv'
 
 def df_from_html(tbl):
 	rows = tbl.find_all('tr')
@@ -42,7 +42,7 @@ def pull_data():
 	
 	
 def parse_names(data):
-	team_data = pd.read_csv('Data\\Teams.csv',sep='\t')
+	team_data = pd.read_csv('Data/Teams.csv',sep='\t')
 	data = data.merge(team_data,how='left',left_on = 'Team',right_on='Teamname')
 	position = data['POS'].str.extract('([^0-9]+)',expand=False)
 	team = data['Shortname']

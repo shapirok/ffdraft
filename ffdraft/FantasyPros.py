@@ -3,8 +3,8 @@ import numpy as np
 import CommonFunctions as cf
 import re
 
-RAW_FILE_NAME = 'RawData\\fantasypros_2018_Draft_Overall_Rankings.csv'
-DATA_FILE_NAME = 'Data\\fpRanks.csv'
+RAW_FILE_NAME = 'RawData/fantasypros_2018_Draft_Overall_Rankings.csv'
+DATA_FILE_NAME = 'Data/fpRanks.csv'
 
 	
 def parse_names(data):

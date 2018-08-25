@@ -4,8 +4,8 @@ import numpy as np
 import pandas as pd
 import CommonFunctions as cf
 
-RAW_FILE_NAME  = 'RawData\\ESPNRawdata.csv'
-DATA_FILE_NAME  = 'Data\\ESPNRanks.csv'
+RAW_FILE_NAME  = 'RawData/ESPNRawdata.csv'
+DATA_FILE_NAME  = 'Data/ESPNRanks.csv'
 
 def pull_data():
 	page = requests.get('http://www.espn.com/fantasy/football/story/_/page/18RanksPreseason300nonPPR/2018-fantasy-football-non-ppr-rankings-top-300')
