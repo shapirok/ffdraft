@@ -38,6 +38,7 @@ def make_file():
 	data.columns = data.columns.str.strip()
 	data.index = cf.getNameIndexFromNames(parse_names(data))
 	data = data.drop(['Overall','WSID','Pos','Team','Bye','vs. ADP'],axis=1)
+	#data['Rank']=data['Rank'].astype(int)
 	data.to_csv(DATA_FILE_NAME,sep='\t',encoding='utf-8')
 	return data
 	

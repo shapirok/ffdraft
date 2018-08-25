@@ -4,35 +4,11 @@ import PlayerList as pl
 import InjuryReport as ir
 import FantasyPros as fp
 import ESPN as espn
-from sklearn.linear_model import LinearRegression
+import DraftAnalysis as da
 import RotoWorld as rw
 import sys
 
-pd.options.display.max_colwidth=500
-
 DATA_FILE_NAME = 'Data\\ffCheatSheet.csv'
-
-def upsideIndicator(fpData):
-	avg = fpData['Avg'].reshape(-1,1)
-	stdev = fpData['Std Dev'].reshape(-1,1)
-	upsideRaw = pow(stdev,2)/avg
-	model = LinearRegression()
-	model.fit(avg,upsideRaw)
-	exp = model.predict(avg)	
-	upside = upsideRaw-exp
-	upside = upside.reshape(-1)
-	upside= (upside/np.linalg.norm(upside)*100).round()
-	#upside = min(max(-10.0,upside),10.0)
-	#upside_indicator = avg*(1+upside/100)
-	# plt.scatter(avg, upside,  color='black')
-	# plt.xticks(())
-	# plt.yticks(())
-	# plt.show()
-	
-	
-	df = pd.Series(upside,index=fpData.index).rename('Upside')
-	return df
-
 
 def main():
 	espnData = espn.make_file()
@@ -46,7 +22,7 @@ def main():
 	noDNoK = cheatSheetWithFPRanks.loc[(cheatSheetWithFPRanks.Position !="DEF") 
 									   & (cheatSheetWithFPRanks.Position !="K")
 									   & (cheatSheetWithFPRanks['Avg'].notnull())]
-	upside = upsideIndicator(noDNoK)
+	upside = da.upsideIndicator(avg = noDNoK['Avg'],stdev = noDNoK['Std Dev'])
 	fpData = pd.concat([fpData,upside],axis=1)
 	fpData = fpData[['Rank','Upside']]
 	fpData.rename(columns={'Rank':'FPRank'},inplace=True)

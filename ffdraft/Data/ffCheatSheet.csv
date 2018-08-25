@@ -71,7 +71,7 @@ S MIC RB NE	Sony	Michel	NE	RB	96	69.0	1.0	Week to Week	Knee “procedure” puts
 R PEN RB SEA	Rashaad	Penny	SEA	RB	85	70.0	8.0	Questionable for Week 1	Getting outplayed by Chris Carson. Now dealing with injured hand. 
 D BRE QB NO	Drew	Brees	NO	QB	128	71.0	-3.0		Led NFL in YPA (8.1). Attempts likely to rebound vs. tougher schedule. 
 R WOO WR LAR	Robert	Woods	LAR	WR	65	72.0	-4.0		Avg’d career-high 65.1 yards per game in first year with Sean McVay. 
-D WAL TE TEN	Delanie	Walker	TEN	TE	78	73.0	-2.0	Status uncertain	800+ yards 4 straight years. Massive positive-TD regression candidate.
+D WAL TE TEN	Delanie	Walker	TEN	TE	78	73.0	-2.0	Week to week	800+ yards 4 straight years. Massive positive-TD regression candidate.
 E ENG TE NYG	Evan	Engram	NYG	TE	79	74.0	-4.0		Healthy returns of OBJ & Shepard + Barkley addition threaten volume.
 M GOO WR SF	Marquise	Goodwin	SF	WR	72	75.0	7.0		Stark splits with/without Garcon but formed Jimmy G rapport.
 I CRO RB NYJ	Isaiah	Crowell	NYJ	RB	59	76.0	-3.0		Played behind Bilal Powell in preseason opener, left with concussion. 
@@ -110,7 +110,7 @@ A HUR WR DAL	Allen	Hurns	DAL	WR	104	108.0	3.0	Day to Day
 J GAR QB SF	Jimmy	Garoppolo	SF	QB	138	109.0	-6.0		Was overall QB6 w/ depleted pass-catcher corps in five ‘17 starts.
 M LEE WR JAC	Marqise	Lee	JAC	WR	101	110.0	5.0		6.7 targets/game last 2 years. High-floor, low-ceiling WR4/flex pick. 
 P MAH QB KC	Patrick	Mahomes	KC	QB	135	111.0	-5.0		Handed keys to high-powered offense on probable shootout team. 
-R MAT WR TEN	Rishard	Matthews	TEN	WR	106	112.0	1.0	Status uncertain	Mysterious “undisclosed” injury has shelved him since spring. 
+R MAT WR TEN	Rishard	Matthews	TEN	WR	106	112.0	1.0	Day to day	Mysterious “undisclosed” injury has shelved him since spring. 
 K GOL WR DET	Kenny	Golladay	DET	WR	102	113.0	-0.0		6-of-28 rookie catches gained 30+ yards. Will play much bigger role. 
 C CAR RB SEA	Chris	Carson	SEA	RB	61	114.0	9.0		Penciled in as Seahawks lead back over first-round pick Rashaad Penny. 
 D BOO RB DEN	Devontae	Booker	DEN	RB	147	115.0	2.0		Broncos favorite for passing-down RB work behind Royce Freeman.
@@ -133,7 +133,7 @@ T MON RB GB	Ty	Montgomery	GB	RB	100	131.0	6.0		On track to open year as Packers 
 J WHI RB NE	James	White	NE	RB	114	132.0	-4.0		Sony Michel knee procedure raises White’s early-season flex appeal.
 D PRE QB DAL	Dak	Prescott	DAL	QB	162	133.0	-6.0		
 T EIF TE CIN	Tyler	Eifert	CIN	TE	136	134.0	0.0		
-T WIL WR LAC	Tyrell	Williams	LAC	WR	228	135.0	9.0		
+T WIL WR LAC	Tyrell	Williams	LAC	WR	228	135.0	9.0	Day-to-day	
 O HOW TE TB	O.J.	Howard	TB	TE	210	136.0	-1.0		Went 21/325/5 over final 27 targets of ’17. Monster ceiling at TE2 cost.
 C CLE RB PHI	Corey	Clement	PHI	RB	155	137.0	5.0	Status uncertain	Versatile Super Bowl star is Jay Ajayi injury away from RB1/2 upside. 
 L MUR RB MIN	Latavius	Murray	MIN	RB	148	138.0	6.0		Likely to keep significant role with Dalvin Cook coming off torn ACL.
@@ -165,7 +165,7 @@ D CAR QB OAK	Derek	Carr	OAK	QB	244	163.0	-7.0
 DEF MIN			MIN	DEF	172	164.0			
 E MAN QB NYG	Eli	Manning	NYG	QB	243	165.0	-4.0		
 D MAR RB OAK	Doug	Martin	OAK	RB	153	166.0	-0.0		
-D FOR RB HOU	D'Onta	Foreman	HOU	RB	202	167.0	11.0	Questionable for training camp	
+D FOR RB HOU	D'Onta	Foreman	HOU	RB	202	167.0	11.0	Questionable for Week 1	
 A DAL QB CIN	Andy	Dalton	CIN	QB	219	168.0	-4.0		
 R KEL RB WAS	Rob	Kelley	WAS	RB	151	169.0	17.0		Plodding back is favorite for Skins early-down work after Guice ACL tear.
 A EKE RB LAC	Austin	Ekeler	LAC	RB	204	170.0	0.0		Explosive change-of-pace back should offer some standalone value. 
@@ -209,7 +209,7 @@ T WIL WR DAL	Terrance	Williams	DAL	WR	226	208.0	-3.0		Plus-sized RAC beast shoul
 DEF NE			NE	DEF	178	209.0			
 R TAN QB MIA	Ryan	Tannehill	MIA	QB	220	211.0	-8.0		
 J TUC K BAL	Justin	Tucker	BAL	K	177	212.0			
-T TAY QB CLE	Tyrod	Taylor	CLE	QB	168	213.0	16.0		
+T TAY QB CLE	Tyrod	Taylor	CLE	QB	168	213.0	16.0	Day-to-day	
 G ZUE K LAR	Greg	Zuerlein	LAR	K	175	214.0			
 M BRY K ATL	Matt	Bryant	ATL	K	184	215.0			
 S WAR RB KC	Spencer	Ware	KC	RB	205	216.0	3.0		
@@ -220,7 +220,7 @@ J WAS WR PIT	James	Washington	PIT	WR	143	220.0	-6.0
 DEF CAR			CAR	DEF	183	221.0			
 DEF NO			NO	DEF	181	222.0			
 J STE RB NYG	Jonathan	Stewart	NYG	RB	208	224.0	-7.0		
-H HUR TE BAL	Hayden	Hurst	BAL	TE	257	225.0	-9.0		
+H HUR TE BAL	Hayden	Hurst	BAL	TE	257	225.0	-9.0	'Week-to-week'	
 D SPR RB PHI	Darren	Sproles	PHI	RB	200	226.0	-6.0		
 D BAI K DAL	Dan	Bailey	DAL	K	223	228.0			
 B MAR WR SEA	Brandon	Marshall	SEA	WR	229	230.0	10.0		
@@ -254,7 +254,7 @@ J CON RB PIT	James	Conner	PIT	RB	209
 T BOY WR CIN	Tyler	Boyd	CIN	WR	217				
 DEF WAS			WAS	DEF	221				
 R SUC K TEN	Ryan	Succop	TEN	K	224				
-A CAL WR CLE	Antonio	Callaway	CLE	WR	232			Status uncertain	
+A CAL WR CLE	Antonio	Callaway	CLE	WR	232			Day to day	
 C COL WR BUF	Corey	Coleman	BUF	WR	233				
 R SMI RB DAL	Rod	Smith	DAL	RB	235				
 C GRA RB JAC	Corey	Grant	JAC	RB	238				
@@ -273,7 +273,7 @@ M VAL WR GB	Marquez	Valdes-Scantling	GB	WR	260
 E ST. WR GB	Equanimeous	St.	GB	WR	261				
 A HUM WR TB	Adam	Humphries	TB	WR	263				
 J WIL RB SF	Joe	Williams	SF	RB	264			Out indefinitely	
-C SIM RB TB	Charles	Sims	TB	RB	265			Week 1	
+C SIM RB TB	Charles	Sims	TB	RB	265			Out for season	
 S DAR QB NYJ	Sam	Darnold	NYJ	QB	269				
 K COU WR HOU	Keke	Coutee	HOU	WR	271				
 D CHA WR JAC	D.J.	Chark	JAC	WR	272				
@@ -294,7 +294,7 @@ D HOP K WAS	Dustin	Hopkins	WAS	K	288
 V DAV TE WAS	Vernon	Davis	WAS	TE	290				
 T KRO TE CIN	Tyler	Kroft	CIN	TE	291				
 B JAR TE DAL	Blake	Jarwin	DAL	TE	292				
-G EVE TE LAR	Gerald	Everett	LAR	TE	293				
+G EVE TE LAR	Gerald	Everett	LAR	TE	293			Week to week	
 T GAB WR CHI	Taylor	Gabriel	CHI	WR	294			Day to day	
 A MCC QB BUF	AJ	McCarron	BUF	QB	296			Status uncertain	
 DEF CIN			CIN	DEF	297				

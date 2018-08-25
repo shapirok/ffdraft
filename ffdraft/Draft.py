@@ -8,22 +8,24 @@ import PlayerList as pl
 import DraftAnalysis as da
 from numpy import rank
 from IPython.display import clear_output
-from threading import Thread
+import csv
 
 class Draft():
-	def __init__(self, draftFile: str =None,teams: int = 12, roster_size: int =15,my_pick: int = 1):
-		if draftFile == None:
-			draftFile= "testdraft.csv"
+	def __init__(self, name: str =None,teams: int = None, roster_size: int =None,my_pick: int = None):
+		try: 
+			draftList = pd.read_csv("Drafts\\"+name+".csv", sep= "\t", index_col=0)
+			parameters = pd.read_csv("Drafts\\"+name+"_params.csv", sep= "\t", index_col	=0).transpose().iloc[0]
+		except:
+			print("Couldn't find files")
 			draftList = pd.DataFrame(columns=[['First','Last','Position','Team','Pick','Roster']])
-			draftList.columns = draftList.columns.str.strip()
-		else:
-			draftList = pd.read_csv("Drafts\\"+draftFile, sep= "\t", index_col	=0)
-		self.draftFile= draftFile
-		self.draftList = draftList
+			parameters = pd.Series({"Teams": teams,"Roster Size": roster_size,"My Pick": my_pick})
+		self.draftList=draftList
+		self.parameters=parameters
+		self.name= name
 		self.playerList = pd.read_csv(pl.DATA_FILE_NAME, sep= "\t", index_col	=0)
-		self.teams = max(1,teams)
-		self.my_pick =min(max(1,my_pick),teams)
-		self.roster_size = max(1,roster_size)
+		self.teams = max(1,parameters["Teams"])
+		self.my_pick =min(max(1,parameters["My Pick"]),self.teams)
+		self.roster_size = max(1,parameters["Roster Size"])
 		self.cheatSheet = pd.read_csv(cs.DATA_FILE_NAME,sep = '\t',index_col=0)
 		self.injuryReport = pd.read_csv(ir.DATA_FILE_NAME,sep = '\t',index_col = 0)
 		self.rotoWorld = pd.read_csv(rw.DATA_FILE_NAME,sep = '\t',index_col = 0)
@@ -75,7 +77,8 @@ class Draft():
 		return self.get_picks().iloc[::-1][:spotsToAutoDraft-1].iloc[::-1]
 	
 	def save_draft(self):
-		self.draftList.to_csv('Drafts\\'+self.draftFile,sep = '\t')
+		self.draftList.to_csv('Drafts\\'+self.name+".csv",sep = '\t')
+		pd.DataFrame.from_dict(self.parameters, orient='columns').to_csv('Drafts\\'+self.name+"_params.csv",sep = '\t')
 	
 	def Analyze(self):
 		return da.Analyze(self)
